@@ -1,6 +1,8 @@
 # This generator program expands a low-dimentional latent vector into a 2D array of tiles.
 # Each line of input should be an array of z vectors (which are themselves arrays of floats -1 to 1)
 # Each line of output is an array of 32 levels (which are arrays-of-arrays of integer tile ids)
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='TRUE'
 
 import torch
 import torchvision.utils as vutils
@@ -26,7 +28,8 @@ n_extra_layers = 0
 features = 10
 
 generator = dcgan.DCGAN_G(imageSize, nz, features, ngf, ngpu, n_extra_layers)
-generator.load_state_dict(torch.load('netG_epoch_5000.pth', map_location=lambda storage, loc: storage))
+generator.load_state_dict(torch.load('../samples/netG_epoch_5000_0_32.pth', map_location=lambda storage, loc: storage))
+# generator.load_state_dict(torch.load('../samples//netG_epoch_5000.pth'))
 
 
 
